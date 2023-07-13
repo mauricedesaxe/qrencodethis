@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ .Title }}</title>
+
+    <!-- import tailwind css cdn -->
+    <script defer src="https://cdn.tailwindcss.com"></script>
+
+    <!-- get htmx & hyperscript from cdn -->
+    <script defer src="https://unpkg.com/htmx.org@1.9.2"></script>
+    <script defer src="https://unpkg.com/hyperscript.org@0.9.9"></script>
+
+    <!-- get alpine.js from cdn -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/@alpinejs/morph@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+  </head>
+  <body>
+    {{embed}}
+  </body>
+</html>
