@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/base64"
 	"log"
 	"os"
 	"time"
@@ -12,6 +13,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/template/html/v2"
 	"github.com/joho/godotenv"
+	"github.com/skip2/go-qrcode"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -134,11 +136,21 @@ func main() {
 			})
 		}
 		// if data is provided, render the QR code
+		var png []byte
+		png, err := qrcode.Encode(data, qrcode.Medium, 256)
+		if err != nil {
+			return c.SendString("❌ Error generating QR code")
+		}
+
+		// Convert to base64
+		b64 := base64.StdEncoding.EncodeToString(png)
+
 		return c.Render("qr", fiber.Map{
 			"Title":       "QR Encode This",
 			"Description": "This site allows you to encode any data into a QR code. You can then scan the QR code with your phone to get the data back. Or you can download the QR code as an image. Or you can copy the URL of the page and share it with someone else.",
 			"Url":         "https://qrencodethis.com",
 			"Data":        data,
+			"Image":       b64,
 		})
 	})
 
