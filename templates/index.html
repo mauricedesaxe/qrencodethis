@@ -17,9 +17,9 @@
       />
       <button
         type="submit"
-        class="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+        class="w-full sm:w-1/3 rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
       >
-        Encode
+        QR encode this
       </button>
     </div>
   </form>
@@ -30,7 +30,7 @@
         type="submit"
         class="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
       >
-        Go back
+        Make another QR code
       </button>
       <!-- button to copy shareable link -->
       <button
@@ -50,7 +50,7 @@
         x-on:click="copy()"
         x-text="copied ? 'Copied!' : 'Copy link'"
       >
-        Copy link
+        Copy shareable link
       </button>
     </div>
     {{ block "qr_image" . }}
