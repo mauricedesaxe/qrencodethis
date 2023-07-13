@@ -115,16 +115,20 @@ func main() {
 	// Render index template
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.Render("index", fiber.Map{
-			"Title": "QR Encode This",
+			"Title":       "QR Encode This",
+			"Description": "This site allows you to encode any data into a QR code. You can then scan the QR code with your phone to get the data back. Or you can download the QR code as an image. Or you can copy the URL of the page and share it with someone else.",
+			"Url":         "https://qrencodethis.com",
 		}, "layouts/app")
 	})
 
 	// Handle page not found; must be the last route
 	app.Use(func(c *fiber.Ctx) error {
 		return c.Render("error", fiber.Map{
-			"Title": "Page not found 😭",
-			"Code":  404,
-			"Error": "We tried our best... looked everywhere, but we couldn't find this page.",
+			"Title":       "Page not found 😭",
+			"Description": "We tried our best... looked everywhere, but we couldn't find this page.",
+			"Url":         "https://qrencodethis.com",
+			"Code":        404,
+			"Error":       "We tried our best... looked everywhere, but we couldn't find this page.",
 		}, "layouts/main")
 	})
 

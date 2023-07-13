@@ -4,6 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ .Title }}</title>
+    <!-- Primary Meta Tags -->
+    <title>{{ .Title }}</title>
+    <meta name="title" content="{{ .Title }}" />
+    <meta name="description" content="{{ .Description }}" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ .Url }}" />
+    <meta property="og:title" content="{{ .Title }}" />
+    <meta property="og:description" content="{{ .Description }}" />
+    <meta property="og:image" content="{{ .Url }}/images/qr_code_illustration.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="{{ .Url }}" />
+    <meta property="twitter:title" content="{{ .Title }}" />
+    <meta property="twitter:description" content="{{ .Description }}" />
+    <meta property="twitter:image" content="{{ .Url }}/images/qr_code_illustration.png" />
+
+    <!-- Meta Tags Generated with {{ .Url }} -->
 
     <!-- import tailwind css cdn -->
     <script defer src="https://cdn.tailwindcss.com"></script>
