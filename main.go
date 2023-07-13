@@ -154,6 +154,30 @@ func main() {
 		})
 	})
 
+	app.Get("/share", func(c *fiber.Ctx) error {
+		data := c.Query("data")
+		if data == "" {
+			return c.SendString("❌ Error: no data provided")
+		}
+		// if data is provided, render the QR code
+		var png []byte
+		png, err := qrcode.Encode(data, qrcode.Medium, 256)
+		if err != nil {
+			return c.SendString("❌ Error generating QR code")
+		}
+
+		// Convert to base64
+		b64 := base64.StdEncoding.EncodeToString(png)
+
+		return c.Render("qr", fiber.Map{
+			"Title":       "QR Encode This",
+			"Description": "This site allows you to encode any data into a QR code. You can then scan the QR code with your phone to get the data back. Or you can download the QR code as an image. Or you can copy the URL of the page and share it with someone else.",
+			"Url":         "https://qrencodethis.com",
+			"Data":        data,
+			"Image":       b64,
+		})
+	})
+
 	// Handle page not found; must be the last route
 	app.Use(func(c *fiber.Ctx) error {
 		return c.Render("error", fiber.Map{
