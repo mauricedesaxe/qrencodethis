@@ -7,6 +7,9 @@
 <div class="mt-8">
   {{ block "form" . }}
   <form hx-get="/qr" hx-target="this" hx-swap="outerHTML">
+    {{ if .Error }}
+    <p class="text-red-500">{{ .Error }}</p>
+    {{ end }}
     <div class="flex flex-col sm:flex-row gap-2">
       <input
         type="text"
@@ -52,7 +55,9 @@
         Copy shareable link
       </button>
     </div>
-    {{ block "qr_image" . }}
+    {{ block "qr_image" . }} {{ if .Error }}
+    <p class="text-red-500">{{ .Error }}</p>
+    {{ end }}
     <!-- download btn -->
     <image
       class="border border-black mt-8 w-full sm:w-96"
