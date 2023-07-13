@@ -61,11 +61,13 @@
         Copy link
       </button>
     </div>
+    {{ block "qr_image" . }}
     <image
       class="border border-black mt-8 w-full sm:w-96"
       src="data:image/png;base64,{{.Image}}"
       alt="QR code illustration"
     />
+    {{ end }}
     <p class="mt-4 text-lg">
       You submitted: <br />
       <span class="mt-2 bg-gray-100 rounded px-2 py-1">{{ .Data }}</span>

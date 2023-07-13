@@ -169,13 +169,13 @@ func main() {
 		// Convert to base64
 		b64 := base64.StdEncoding.EncodeToString(png)
 
-		return c.Render("qr", fiber.Map{
-			"Title":       "QR Encode This",
+		return c.Render("qr_image", fiber.Map{
+			"Title":       "Someone shared this QR code with you",
 			"Description": "This site allows you to encode any data into a QR code. You can then scan the QR code with your phone to get the data back. Or you can download the QR code as an image. Or you can copy the URL of the page and share it with someone else.",
 			"Url":         "https://qrencodethis.com",
 			"Data":        data,
 			"Image":       b64,
-		})
+		}, "layouts/app")
 	})
 
 	// Handle page not found; must be the last route
