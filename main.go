@@ -7,65 +7,14 @@ import (
 	"os"
 	"time"
 
-	"github.com/go-redis/redis"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cache"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/template/html/v2"
-	"github.com/joho/godotenv"
 	"github.com/skip2/go-qrcode"
-	"gorm.io/driver/sqlite"
-	"gorm.io/gorm"
 )
 
-var localDb *gorm.DB
-var redisClient *redis.Client
 var ctx = context.Background()
-
-// Cache is our model, which corresponds to the "cache" database table.
-// It contains a key and a value, both of which are strings.
-// We use it to store the results of our charts.
-type Cache struct {
-	gorm.Model
-	Key   string `gorm:"uniqueIndex"`
-	Value string `gorm:"type:json"`
-}
-
-// runs before main() when the package is initialized
-func init() {
-	var err error
-	localDb, err = gorm.Open(sqlite.Open("local.db"), &gorm.Config{})
-	if err != nil {
-		log.Fatalf("failed to connect local database")
-	}
-
-	err = godotenv.Load()
-	if err != nil {
-		log.Println("❌ Error loading .env file")
-	}
-
-	// Connect to redis
-	redisUrl, ok := os.LookupEnv("REDIS_URL")
-	if !ok {
-		log.Println("⚠️ REDIS_URL environment variable not set, defaulting to localhost:6379")
-		redisUrl = "redis://localhost:6379"
-	}
-	opts, err := redis.ParseURL(redisUrl)
-	if err != nil {
-		log.Fatalf("failed to parse redis url")
-	}
-	redisClient = redis.NewClient(opts)
-	_, err = redisClient.Ping().Result()
-	if err != nil {
-		log.Fatalf("failed to connect to redis")
-	}
-
-	// Migrate the schema
-	err = localDb.AutoMigrate(&Cache{})
-	if err != nil {
-		log.Fatalf("failed to migrate local database")
-	}
-}
 
 func main() {
 	// Create a new template engine
@@ -94,13 +43,6 @@ func main() {
 		},
 	})
 	app.Use(logger.New())
-
-	// Connect to database
-	var err error
-	localDb, err = gorm.Open(sqlite.Open("local.db"), &gorm.Config{})
-	if err != nil {
-		log.Fatalf("failed to connect database")
-	}
 
 	// Cache middleware for all routes
 	app.Use(cache.New(cache.Config{
@@ -166,7 +108,6 @@ func main() {
 		data := c.Query("data")
 		if data == "" {
 			log.Println("❌ No data provided")
-			log.Println(err)
 			return c.Render("qr_image", fiber.Map{
 				"Title":       "QR Encode This",
 				"Description": "This site allows you to encode any data into a QR code. You can then scan the QR code with your phone to get the data back. Or you can download the QR code as an image. Or you can copy the URL of the page and share it with someone else.",
@@ -219,7 +160,7 @@ func main() {
 		port = "3000" // default port if environment variable is not set
 	}
 
-	err = app.Listen(":" + port)
+	err := app.Listen(":" + port)
 	if err != nil {
 		log.Fatalf("Failed to start the server: %v", err)
 	}
