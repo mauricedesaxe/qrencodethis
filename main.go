@@ -61,7 +61,7 @@ func main() {
 		return c.Render("index", fiber.Map{
 			"Title":       "QR Encode This",
 			"Description": "This site allows you to encode any data into a QR code. You can then scan the QR code with your phone to get the data back. Or you can download the QR code as an image. Or you can copy the URL of the page and share it with someone else.",
-			"Url":         "https://qrencodethis.com",
+			"Url":         "https://www.qrencodethis.com",
 		}, "layouts/app")
 	})
 
@@ -73,7 +73,7 @@ func main() {
 			return c.Render("form", fiber.Map{
 				"Title":       "QR Encode This",
 				"Description": "This site allows you to encode any data into a QR code. You can then scan the QR code with your phone to get the data back. Or you can download the QR code as an image. Or you can copy the URL of the page and share it with someone else.",
-				"Url":         "https://qrencodethis.com",
+				"Url":         "https://www.qrencodethis.com",
 				"Data":        data,
 			})
 		}
@@ -86,7 +86,7 @@ func main() {
 			return c.Render("form", fiber.Map{
 				"Title":       "QR Encode This",
 				"Description": "This site allows you to encode any data into a QR code. You can then scan the QR code with your phone to get the data back. Or you can download the QR code as an image. Or you can copy the URL of the page and share it with someone else.",
-				"Url":         "https://qrencodethis.com",
+				"Url":         "https://www.qrencodethis.com",
 				"Data":        data,
 				"Error":       "❌ Error generating QR code, please try again.",
 			})
@@ -98,7 +98,7 @@ func main() {
 		return c.Render("qr", fiber.Map{
 			"Title":       "QR Encode This",
 			"Description": "This site allows you to encode any data into a QR code. You can then scan the QR code with your phone to get the data back. Or you can download the QR code as an image. Or you can copy the URL of the page and share it with someone else.",
-			"Url":         "https://qrencodethis.com",
+			"Url":         "https://www.qrencodethis.com",
 			"Data":        data,
 			"Image":       b64,
 		})
@@ -111,7 +111,7 @@ func main() {
 			return c.Render("qr_image", fiber.Map{
 				"Title":       "QR Encode This",
 				"Description": "This site allows you to encode any data into a QR code. You can then scan the QR code with your phone to get the data back. Or you can download the QR code as an image. Or you can copy the URL of the page and share it with someone else.",
-				"Url":         "https://qrencodethis.com",
+				"Url":         "https://www.qrencodethis.com",
 				"Data":        data,
 				"Error":       "❌ No data provided.",
 			}, "layouts/app")
@@ -125,7 +125,7 @@ func main() {
 			return c.Render("qr_image", fiber.Map{
 				"Title":       "QR Encode This",
 				"Description": "This site allows you to encode any data into a QR code. You can then scan the QR code with your phone to get the data back. Or you can download the QR code as an image. Or you can copy the URL of the page and share it with someone else.",
-				"Url":         "https://qrencodethis.com",
+				"Url":         "https://www.qrencodethis.com",
 				"Data":        data,
 				"Error":       "❌ Error generating QR code",
 			}, "layouts/app")
@@ -137,7 +137,7 @@ func main() {
 		return c.Render("qr_image", fiber.Map{
 			"Title":       "Someone shared this QR code with you",
 			"Description": "This site allows you to encode any data into a QR code. You can then scan the QR code with your phone to get the data back. Or you can download the QR code as an image. Or you can copy the URL of the page and share it with someone else.",
-			"Url":         "https://qrencodethis.com",
+			"Url":         "https://www.qrencodethis.com",
 			"Data":        data,
 			"Image":       b64,
 		}, "layouts/app")
@@ -148,7 +148,7 @@ func main() {
 		return c.Render("error", fiber.Map{
 			"Title":       "Page not found 😭",
 			"Description": "We tried our best... looked everywhere, but we couldn't find this page.",
-			"Url":         "https://qrencodethis.com",
+			"Url":         "https://www.qrencodethis.com",
 			"Code":        404,
 			"Error":       "We tried our best... looked everywhere, but we couldn't find this page.",
 		}, "layouts/main")
